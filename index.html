@@ -1,1 +1,115 @@
-<h1>Hello! Page is under contruction. Coming soon.</h1>
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+
+	<title>Medium 5</title>
+	
+	<link rel="stylesheet" href="http://yui.yahooapis.com/pure/0.6.0/pure-min.css">
+	<link rel="stylesheet" href="http://netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css">
+	<link rel="stylesheet" href="css/main.css">
+
+
+</head>
+<body>
+	<div id="layout" class="">
+		<div id="main">
+
+			<div class="header">
+				<h1>Medium 5</h1>
+
+
+				<h2>
+					Tìm 5 ẩn số (X<sub>1</sub>, X<sub>2</sub>, X<sub>3</sub>, X<sub>4</sub>, X<sub>5</sub>) khi biết trung bình bình cộng <a id="more" href="#" style="font-size: medium;">... more</a>
+				</h2>
+
+			</div>
+
+			<div class="content">
+				<div id="description" style="display:none;">			
+
+					<h2 id="default-form" class="content-subhead">Yêu Cầu :</h2>
+					<p>
+						Nhập vào 1 số là trung bình cộng của 5 ẩn số  ( X<sub>1</sub>, X<sub>2</sub>, X<sub>3</sub>, X<sub>4</sub>, X<sub>5</sub> ) : 5
+					</p>
+					<p>
+						Chương trình sẽ tự tính toán theo  thuật toán nào đó mà “mò” ra được giá trị của X<sub>1</sub>, X<sub>2</sub>, X<sub>3</sub>, X<sub>4</sub>, X<sub>5</sub> với điều kiện ràng buộc sau :
+					</p>
+					<ol>
+						<li>Năm con số X<sub>1</sub>, X<sub>2</sub>, X<sub>3</sub>, X<sub>4</sub>, X<sub>5</sub> tìm ra phải không được cách đều nhau, mà cần phải lệch nhau theo kiểu ngẫu nhiên.<br>
+							Vd : Nhập vào 3 thì không được cho ra giá trị là 1, 2, 3, 4, 5. Kết quả có thể là :
+							3 x 5 = 15 = 1.3 (X<sub>1</sub>) + 2.4 (X<sub>2</sub>) + 2.8 (X<sub>3</sub>) + 3.6 (X<sub>4</sub>) + 4.9 (X<sub>5</sub>)
+							Hoặc chương trình sẽ có nhiều kết quả ngẫu nhiên khác miễn sao phù hợp với điều kiện thứ 2 tiếp sau</li>
+							<li>Điều kiện “quái quỉ” nhất là đây : độ lệch giữa các số trong 5 con số X<sub>1</sub>, X<sub>2</sub>, X<sub>3</sub>, X<sub>4</sub>, X<sub>5</sub> không được vượt quá  <strong>0.7</strong><br>
+								Vd : Nhập vào 2.32 => 2.32 x 5 = 11.6 = 2.32 (X<sub>1</sub>) + 2.64 (X<sub>2</sub>) + 2.5 (X<sub>3</sub>) + 2.1 (X<sub>4</sub>) + 2.04 (X<sub>5</sub>)
+							</li>
+
+						</ol>
+
+					</div>
+					<form class="pure-form">
+						<fieldset>
+							<div class="pure-control-group">
+								<label for="medium">Nhập số trung bình cộng</label>
+								<input type="text" name="medium" id="medium" style="text-align:center;">
+								<button class="pure-button" id="search">
+									<i class="fa fa-search" aria-hidden="true"></i>
+									Tìm
+								</button>
+							</div>							
+						</fieldset>
+					</form>
+
+					<h2 class="content-subhead">Kết Quả</h2>
+
+					<table class="pure-table">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>X<sub>1</sub></th>
+								<th>X<sub>2</sub></th>
+								<th>X<sub>3</sub></th>
+								<th>X<sub>4</sub></th>
+								<th>X<sub>5</sub></th>
+							</tr>
+						</thead>
+
+						<tbody>
+							<tr>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+								<td></td>
+							</tr>
+
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>
+
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script src="js/medium5.js"></script>
+
+		<script>
+			$(document).ready(function(){
+				$("#more").click(function(event){
+					event.preventDefault();
+					var newText = $(this).text().indexOf("more") >= 0 ? "... hide" : "... more";
+					$("#description").slideToggle("slow", function () {
+						$("#more").text(newText);
+					});					
+				});
+
+				$("#search").click(function(event){
+					event.preventDefault();
+					//call function here
+				});	
+			});
+		</script>
+
+	</body>
+	</html>
