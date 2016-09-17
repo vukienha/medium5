@@ -120,14 +120,16 @@
 
 				$("#search").click(function(event){
 					event.preventDefault();
+
 					var med = $("#medium").val();
-					//validate med for number format
+					
+					//re-draw table
 					if ( $.fn.dataTable.isDataTable( '#results_tb' ) ) {
 						var table = $('#results_tb').DataTable();
 						table.clear();
 						table.destroy();
 					}
-				// console.log(medium5(med));
+					
 				// loading
 				$("#loader").show(
 					"slow", function () {
