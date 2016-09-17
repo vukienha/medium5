@@ -8,7 +8,34 @@
 	
 	<link rel="stylesheet" href="https://yui-s.yahooapis.com/pure/0.6.0/pure-min.css">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.10.12/css/jquery.dataTables.min.css">
 	<link rel="stylesheet" href="css/main.css">
+
+	<style>
+		.loader {
+			position: relative;
+			left: 50%;
+			top: 50%;
+			z-index: 1;
+			border: 5px solid #f3f3f3;
+			-webkit-animation: spin 1s linear infinite;
+			animation: spin 1s linear infinite;
+			border-top: 5px solid #555;
+			border-radius: 50%;
+			width: 50px;
+			height: 50px;
+		}
+
+		@-webkit-keyframes spin {
+			0% { -webkit-transform: rotate(0deg); }
+			100% { -webkit-transform: rotate(360deg); }
+		}
+
+		@keyframes spin {
+			0% { transform: rotate(0deg); }
+			100% { transform: rotate(360deg); }
+		}
+	</style>
 
 
 </head>
@@ -21,7 +48,7 @@
 
 
 				<h2>
-					Tìm 5 ẩn số (X<sub>1</sub>, X<sub>2</sub>, X<sub>3</sub>, X<sub>4</sub>, X<sub>5</sub>) khi biết trung bình bình cộng <a id="more" href="#" style="font-size: medium;">... more</a>
+					Tìm 5 ẩn số (X<sub>1</sub>, X<sub>2</sub>, X<sub>3</sub>, X<sub>4</sub>, X<sub>5</sub>) khi biết trung bình cộng <a id="more" href="#" style="font-size: medium;">... more</a>
 				</h2>
 
 			</div>
@@ -52,10 +79,14 @@
 						<fieldset>
 							<div class="pure-control-group">
 								<label for="medium">Nhập số trung bình cộng</label>
-								<input type="text" name="medium" id="medium" style="text-align:center;">
+								<input type="text" name="medium" id="medium" style="text-align:center;" placeholder="VD: 10 hoặc 12.75">
 								<button class="pure-button" id="search">
 									<i class="fa fa-search" aria-hidden="true"></i>
 									Tìm
+								</button>
+								<button class="pure-button" id="clear" onclick="location.reload();">
+									<i class="fa fa-refresh" aria-hidden="true"></i>
+									Clear
 								</button>
 							</div>							
 						</fieldset>
@@ -63,35 +94,17 @@
 
 					<h2 class="content-subhead">Kết Quả</h2>
 
-					<table class="pure-table">
-						<thead>
-							<tr>
-								<th>#</th>
-								<th>X<sub>1</sub></th>
-								<th>X<sub>2</sub></th>
-								<th>X<sub>3</sub></th>
-								<th>X<sub>4</sub></th>
-								<th>X<sub>5</sub></th>
-							</tr>
-						</thead>
+					<div id="loader" class="loader" style="display:none;"></div>
 
-						<tbody>
-							<tr>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-								<td></td>
-							</tr>
-
-						</tbody>
+					<table id="results_tb" class="display" cellspacing="0" width="100%">
+						
 					</table>
 				</div>
 			</div>
 		</div>
 
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+		<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.12/js/jquery.dataTables.min.js"></script>
 		<script src="js/medium5.js"></script>
 
 		<script>
@@ -106,8 +119,39 @@
 
 				$("#search").click(function(event){
 					event.preventDefault();
-					//call function here
-				});	
+					var med = $("#medium").val();
+					//validate med for number format
+					// var table = $('#results_tb').DataTable();
+					// table.clear();
+					if ( $.fn.dataTable.isDataTable( '#results_tb' ) ) {
+						table = $('#results_tb').DataTable();
+						table.destroy();
+					}
+				// console.log(medium5(med));
+				// loading
+				$("#loader").show(
+					"slow", function () {
+						var table = $('#results_tb').on( 'init.dt', function () {
+							$("#loader").hide();
+						} ).DataTable( {					    
+							"ordering": false,
+							"processing": true,
+							"language": {"processing": "DataTables is currently busy"},
+							data: medium5(med),
+							columns: [
+							{ title: "X<sub>1</sub>", className: "dt-head-left" },
+							{ title: "X<sub>2</sub>", className: "dt-head-left" },
+							{ title: "X<sub>3</sub>", className: "dt-head-left" },
+							{ title: "X<sub>4</sub>", className: "dt-head-left" },
+							{ title: "X<sub>5</sub>", className: "dt-head-left" }
+							]
+						} );
+					}
+					
+					);
+
+			});	
+
 			});
 		</script>
 
