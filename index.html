@@ -121,10 +121,9 @@
 					event.preventDefault();
 					var med = $("#medium").val();
 					//validate med for number format
-					// var table = $('#results_tb').DataTable();
-					// table.clear();
 					if ( $.fn.dataTable.isDataTable( '#results_tb' ) ) {
-						table = $('#results_tb').DataTable();
+						var table = $('#results_tb').DataTable();
+						table.clear();
 						table.destroy();
 					}
 				// console.log(medium5(med));

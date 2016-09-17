@@ -28,8 +28,16 @@ function medium5(med) {
 }
 
 function meet(med, x1, x2, x3, x4, x5) {
-	if (med*5 == (x1+x2+x3+x4+x5)) {	
-		return true;
+	if (med*5 == (x1+x2+x3+x4+x5)) {
+		var k1 = x2-x1;
+		var k2 = x3-x2;
+		var k3 = x4-x3;
+		var k4 = x5-x4;
+		if ((k1==k2)&&(k2==k3)&&(k3==k4)) {
+			return false;
+		} else {
+			return true;
+		}	
 	} else {
 		return false;
 	}
